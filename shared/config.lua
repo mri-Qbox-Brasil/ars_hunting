@@ -16,7 +16,7 @@ Config.AimBlock = {
     global = true,     -- false if you want to have aimblock only in hunting zones
     weaponsToBlock = { -- weapons that are disabled to shoot at players
         `WEAPON_HEAVYSNIPER_MK2`,
-        -- `WEAPON_HEAVYSNIPER`,
+        `WEAPON_MUSKET`,
     }
 }
 
@@ -41,12 +41,12 @@ Config.Campfire = {
     campfireItem = "campfire",
     items = {
         {
-            label = "Cooked meat",
+            label = "Bife assado",
             give = "cooked_meat",
             cookTime = 5, -- seconds
             require = {
                 {
-                    label = "Raw Meat",
+                    label = "Carne crua",
                     quantity = 1,
                     item = "raw_meat",
                 },
