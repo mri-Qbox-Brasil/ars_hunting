@@ -2,7 +2,7 @@ lib.locale()
 
 Config = {}
 Config.Debug = false
-Config.Target = nil               -- only supporting ox_target and qb-target | nil to disable targeting
+Config.Target = "ox_target"               -- only supporting ox_target and qb-target | nil to disable targeting
 Config.SpawnDelay = 1             -- seconds [how much time it should take between spawning animals]
 Config.DeleteEntityRadius = 300.0 -- will delete animal if your 400 meters away from them
 
@@ -41,7 +41,7 @@ Config.Campfire = {
     campfireItem = "campfire",
     items = {
         {
-            label = "Bife assado",
+            label = "Carne cozida",
             give = "cooked_meat",
             cookTime = 5, -- seconds
             require = {
@@ -81,7 +81,7 @@ Config.HuntingZones = {
         coords = vec3(1125.88, 4622.2, 80.08),
         radius = 200.0,
         maxSpawns = 5,                                                  -- max animals spawned at one time
-        allowedWeapons = { "WEAPON_HEAVYSNIPER_MK2", "WEAPON_DAGGER" }, -- nil if you want to allow every weapon
+        allowedWeapons = { "WEAPON_HEAVYSNIPER_MK2", "WEAPON_MUSKET", "WEAPON_DAGGER" }, -- nil if you want to allow every weapon
         zone_radius = {
             enable = true,
             color = 1,

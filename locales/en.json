@@ -15,6 +15,7 @@
 	"cooking_item": "Cooking %s",
 	"cook_items": "Cook items",
 	"take_campfire": "Take",
+	"taking_campfire": "Taking campfire",
 	"animal_near_bait": "An animal is near the bait",
 	"bait_despawned": "The bait has been despawned",
 	"buy_item_x": "Buying %s",

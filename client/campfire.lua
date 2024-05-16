@@ -29,7 +29,7 @@ local function openCampfireMenu(campfire, campfirePoint)
                                 local hasItems = lib.callback.await('ars_hunting:hasItems', false, item.require)
                                 if not hasItems then return utils.showNotification(locale("no_items")) end
 
-                                if lib.progressBar({
+                                if lib.progressCircle({
                                         duration = item.cookTime * 1000,
                                         label = (locale("cooking_item")):format(item.label),
                                         useWhileDead = false,
@@ -73,7 +73,7 @@ local function openCampfireMenu(campfire, campfirePoint)
                 icon = "fa-solid fa-xmark",
                 iconColor = "#fc8803",
                 onSelect = function()
-                    lib.progressBar({
+                    lib.progressCircle({
                         duration = 1000,
                         label = locale("taking_campfire"),
                         useWhileDead = false,
@@ -105,7 +105,7 @@ end
 local function useCampFire()
     lib.requestModel("prop_beach_fire")
 
-    lib.progressBar({
+    lib.progressCircle({
         duration = 1000,
         label = locale("placing_campfire"),
         useWhileDead = false,
@@ -139,7 +139,7 @@ local function useCampFire()
                 {
                     name = "harvest_animal",
                     label = locale('interact_campfire'),
-                    icon = 'fa-solid fa-tent',
+                    icon = 'fa-solid fa-fire-burner',
                     onSelect = function(data)
                         openCampfireMenu(campfire)
                     end
