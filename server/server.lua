@@ -32,10 +32,12 @@ RegisterNetEvent("ars_hunting:harvestAnimal", function(data)
 
     framework.addItems({ target = source, items = { { item = skin.item, quantity = math.random(1, skin.maxQuantity) } } })
     framework.addItems({ target = source, items = { { item = meat.item, quantity = math.random(1, meat.maxQuantity) } } })
+    exports["cw-rep"]:updateSkill(source, 'hunting', 5)
 
     if 0.3 >= math.random() then
         local extraItem = getRarity(data.items.extra)
         framework.addItems({ target = source, items = { { item = extraItem.item, quantity = math.random(1, extraItem.maxQuantity) } } })
+        exports["cw-rep"]:updateSkill(source, 'hunting', 5)
     end
 end)
 
@@ -44,6 +46,7 @@ RegisterNetEvent("ars_hunting:cookItem", function(data)
         framework.removeItem({ target = source, item = item.item, count = item.quantity })
     end
     framework.addItems({ target = source, items = data.give })
+    exports["cw-rep"]:updateSkill(source, 'cooking', 5)
 end)
 
 RegisterNetEvent("ars_hunting:takeCampfire", function(data)
@@ -81,6 +84,7 @@ RegisterNetEvent("ars_hunting:finishMission", function(data)
     if dist > 3.0 then return print("ARS HUNTING >> PLAYER MIGHT BE CHEATING ID: " .. source) end
 
     framework.addItems({ target = source, items = data.rewards })
+    exports["cw-rep"]:updateSkill(source, 'hunting', 5)
 
     if data.requirements then
         for _, item in pairs(data.requirements) do

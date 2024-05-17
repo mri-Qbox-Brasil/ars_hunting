@@ -222,7 +222,7 @@ function harvestAnimal(animal, entityCoords, entity)
         local cam = initCam(entity)
         FreezeEntityPosition(entity, true)
 
-        lib.progressBar({
+        lib.progressCircle({
             duration = animal.harvestTime * 1000,
             label = locale("harvesting_animal"),
             useWhileDead = false,

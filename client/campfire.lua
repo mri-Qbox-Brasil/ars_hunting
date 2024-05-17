@@ -137,7 +137,7 @@ local function useCampFire()
         if Config.Target == "ox_target" then
             exports.ox_target:addLocalEntity(campfire, {
                 {
-                    name = "harvest_animal",
+                    name = "interact_campfire",
                     label = locale('interact_campfire'),
                     icon = 'fa-solid fa-fire-burner',
                     onSelect = function(data)
@@ -151,8 +151,8 @@ local function useCampFire()
                     {
                         num = 1,
                         type = "client",
-                        icon = 'fas fa-tent',
                         label = locale('interact_campfire'),
+                        icon = 'fa-solid fa-fire-burner',
                         action = function()
                             openCampfireMenu(campfire)
                         end,
