@@ -175,7 +175,7 @@ local function spawnEntities()
                                 {
                                     name = "harvest_animal",
                                     label = locale('interact_haverest_animal'),
-                                    icon = 'fa-solid fa-knife',
+                                    icon = 'fa-solid fa-hand',
                                     onSelect = function(data)
                                         harvestAnimal(animal, entityCoords, entity)
                                     end
