@@ -24,7 +24,7 @@ Config.BaitItem = "huntingbait"
 Config.BaitAttractionDistance = 100.0 -- in 200 radius it will atract an animal
 Config.BaitTimeLimit = 2              -- minutes
 
-Config.ImagesPath = "nui://ars_hunting/_icons/"
+Config.ImagesPath = "nui://ox_inventory/web/images/"
 
 
 -- _____                           __  _
@@ -81,7 +81,7 @@ Config.HuntingZones = {
         coords = vec3(1125.88, 4622.2, 80.08),
         radius = 200.0,
         maxSpawns = 5,                                                  -- max animals spawned at one time
-        allowedWeapons = { "WEAPON_HEAVYSNIPER_MK2", "WEAPON_MUSKET", "WEAPON_DAGGER" }, -- nil if you want to allow every weapon
+        allowedWeapons = { "WEAPON_HEAVYSNIPER_MK2", "WEAPON_MUSKET", "WEAPON_DAGGER", "WEAPON_KNIFE" }, -- nil if you want to allow every weapon
         zone_radius = {
             enable = true,
             color = 1,
@@ -99,7 +99,7 @@ Config.HuntingZones = {
                 model = "a_c_deer",
                 chance = 80, -- chance of spawning
                 harvestTime = 5,
-                harvestWeapons = { "WEAPON_DAGGER" },
+                harvestWeapons = { "WEAPON_DAGGER", "WEAPON_KNIFE" },
                 blip = {
                     enable = true,
                     name = 'Deer',
@@ -407,8 +407,8 @@ Config.HuntingZones = {
 --                      |_|
 
 Config.Shops = {
-    ["HuntGear Store"] = {
-        coords = vector4(967.6, -2121.12, 30.48, 86.84),
+    ["Loja de Caçador"] = {
+        coords = vec4(-679.28, 5834.25, 16.33, 132.58),
         ped = {
             enable = Config.Target and true or true, -- false the last bool to dont use ped
             model = "s_m_m_ammucountry"
@@ -458,18 +458,42 @@ Config.Shops = {
             buy = {
                 {
                     item = "huntingbait",
-                    label = "hunting Bait",
+                    label = "Isca de Caçador",
                     price = 250,
                 },
                 {
                     item = "campfire",
-                    label = "Campfire",
+                    label = "Fogueira",
                     price = 750,
                 },
                 {
                     item = "animal_tracker",
-                    label = "Animal Tracker",
+                    label = "Rastreador Animal",
                     price = 10050,
+                },
+                {
+                    item = "WEAPON_MUSKET",
+                    label = "Espingarda Antiga",
+                    description = "Desbloqueado",
+                    price = 20000,
+                },
+                {
+                    item = "ammo-musket",
+                    label = "Munição de Espingarda",
+                    description = "Desbloqueado",
+                    price = 50,
+                },
+                {
+                    item = "WEAPON_HEAVYSNIPER_MK2",
+                    label = "Rifle de Precisão Pesado",
+                    levelmin = 1,
+                    price = 200000,
+                },
+                {
+                    item = "ammo-heavysniper",
+                    label = "Munição de Rifle .50 BGM",
+                    levelmin = 1,
+                    price = 1000,
                 },
             }
 
@@ -558,7 +582,7 @@ Config.HuntMaster = {
     model = "cs_fabien",
     blip = {
         enable = true,
-        name = 'Hunting Missions',
+        name = 'Missões de Caça',
         type = 85,
         scale = 0.8,
         color = 5,
@@ -569,8 +593,8 @@ Config.HuntMaster = {
 
 Config.Missions = {
     {
-        label = "High-Quality Pelts",
-        content = "Bring me 10 high-quality deer skins",
+        label = "Couro de alta qualidade",
+        content = "Traga-me 10 peles de veado de alta qualidade",
         icon = "fa-solid fa-bullseye",
         image = Config.ImagesPath .. "skin_deer_good.png",
         delay = 10, -- wait 10 minutes do another of this mission
@@ -584,7 +608,7 @@ Config.Missions = {
         requirements = {
             {
                 item = "skin_deer_good",
-                label = "Prime Deer Pelt",
+                label = "Pele de veado prime",
                 quantity = 10
             }
         },
@@ -596,8 +620,8 @@ Config.Missions = {
         }
     },
     {
-        label = "Antler Collection",
-        content = "Gather 5 Deer Horns for my collection",
+        label = "Coleção de Chifres",
+        content = "Reúna 5 chifres de veados para minha coleção",
         icon = "fa-solid fa-bullseye",
         image = Config.ImagesPath .. "deer_horn.png",
         delay = 10, -- wait 10 minutes do another of this mission
@@ -611,7 +635,7 @@ Config.Missions = {
         requirements = {
             {
                 item = "deer_horn",
-                label = "Deer Horns",
+                label = "Chifres de veado",
                 quantity = 5
             }
         },
@@ -623,11 +647,11 @@ Config.Missions = {
         }
     },
     {
-        label = "Boar Bounty",
-        content = "- Catch The boar and bring it to hunt master",
+        label = "Recompensa de javali",
+        content = "Pegue o javali e leve-o para o Mestre Caçador",
         icon = "fa-solid fa-bullseye",
         image = Config.ImagesPath .. "boar.png",
-        delay = 10, -- wait 10 minutes do another of this mission
+        delay = 0, -- wait 10 minutes do another of this mission
         time = 10,  -- minutes
         type = "animal",
         id = "mission_3",

@@ -60,6 +60,8 @@ function utils.createVehicle(name, ...)
     NetworkFadeInEntity(vehicle, true)
     SetModelAsNoLongerNeeded(model)
 
+    TriggerEvent('vehiclekeys:client:SetOwner', GetVehicleNumberPlateText(vehicle))
+
     return vehicle
 end
 

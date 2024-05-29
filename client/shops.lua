@@ -22,16 +22,25 @@ local function openShop(items, shopName)
     if items.buy and items.buy[1] then
         options[#options + 1] = {
             title = locale("shop_buy_item"),
-            icon = Config.ImagesPath .. "sell.png",
+            icon = "fa-solid fa-cart-shopping",
             onSelect = function()
                 local _items = {}
+                local level = exports["cw-rep"]:getCurrentLevel('hunting')
+                print("Level: ", level)
+
 
                 for i = 1, #items.buy do
                     local item = items.buy[i]
+                    if item.levelmin then
+                        item.description = ("Desbloqueia no LV %s"):format(item.levelmin)
+                    end
+
                     _items[#_items + 1] = {
                         title = item.label,
                         icon = Config.ImagesPath .. item.item .. ".png",
-                        description = ("%s$"):format(item.price),
+                        disabled = level < (item.levelmin or 0),
+                        description = ("%s  \nR$ %s"):format(item.description or "",item.price),
+                        image = Config.ImagesPath .. item.item .. ".png",
                         onSelect = function()
                             sellBuyItem(item, true)
                         end
@@ -52,7 +61,7 @@ local function openShop(items, shopName)
     if items.sell and items.sell[1] then
         options[#options + 1] = {
             title = locale("shop_sell_item"),
-            icon = Config.ImagesPath .. "buy.png",
+            icon = "fa-solid fa-money-bill-wave",
             onSelect = function()
                 local _items = {}
 
@@ -62,6 +71,7 @@ local function openShop(items, shopName)
                         title = item.label,
                         icon = Config.ImagesPath .. item.item .. ".png",
                         description = ("%s$"):format(item.price),
+                        image = Config.ImagesPath .. item.item .. ".png",
                         onSelect = function()
                             sellBuyItem(item, false)
                         end
@@ -114,9 +124,9 @@ for shopName, shopData in pairs(Config.Shops) do
                     if Config.Target == "ox_target" then
                         exports.ox_target:addLocalEntity(ped, {
                             {
-                                name = "harvest_animal",
+                                name = "open_shop_hunting",
                                 label = (locale("interact_open_shop")):format(shopName),
-                                icon = 'fa-solid fa-knife',
+                                icon = 'fa-solid fa-basket-shopping',
                                 onSelect = function(data)
                                     openShop(shopData.items, shopName)
                                 end
