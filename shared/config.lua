@@ -495,6 +495,12 @@ Config.Shops = {
                     levelmin = 1,
                     price = 1000,
                 },
+                {
+                    item = "WEAPON_KNIFE",
+                    label = "Faca para esfolar",
+                    levelmin = 1,
+                    price = 1000,
+                },
             }
 
         }
