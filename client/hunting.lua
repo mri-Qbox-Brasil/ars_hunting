@@ -474,9 +474,118 @@ function deleteAllEntities()
     end
 end
 
+
+local npcTalk = nil
+local function createNPCtalk()
+	if not Config.npcTalk then return end
+	npcTalk = exports['rep-talkNPC']:CreateNPC({
+		npc = 'cs_hunter',
+		coords = vec3(-677.36, 5832.1, 16.33),
+		heading = 60.58,
+		name = 'Seu Tião',
+		tag = 'CAÇADOR',
+		animScenario = 'WORLD_HUMAN_CLIPBOARD',
+		color = "green",
+		startMSG = 'Pra ser caçador tem que ter coragem! Você tem?'
+	}, {
+		[1] = {
+			label = "Como funciona esse trabalho?",
+			shouldClose = false,
+			action = function()
+                exports['rep-talkNPC']:changeDialog("👋 Olá, me chamo 😃**Tião Nascimento**, mas pode me chamar de **Seu Tião**.  \nAgora vou te ensinar a 🦌 caçar. Para isso, você vai precisar de uma 🔫 arma de caça para abater os animais e uma 🔪 faca de esfolar para retirar a pele e carne deles.",
+					{
+						[1] = {
+							label = "Entendido. E depois?",
+							action = function()
+								exports['rep-talkNPC']:changeDialog("Nesta localização do mapa, você encontrará os animais e também pode usar o 📡 localizador de animais ou a 🦴 ração para atraí-los até você.  Depois de abater e retirar a carne deles, você pode vendê-las 🏪 com o tiozão ao lado.",
+								{
+									[1] = {
+										label = "Entendido. Tem mais algo que eu deva saber?",
+										action = function()
+											exports['rep-talkNPC']:changeDialog("Ah sim... Lembrando que você também pode fazer as missões que meu irmão (Mestre da Caça) te passará caso queira. Ele fica nessa localização em seu GPS.  \nE tome cuidado, porque você também pode ser caçado pelos animais. 🐾",
+											{
+												[1] = {
+													label = "Bora trabalhar!",
+													action = function()
+													end
+												},
+												[2] = {
+													label = "Localizar Mestre da Caça.",
+													shouldClose = true,
+													action = function()
+														local waypoints = {
+															{name = 'Missões de Caça', coords = vec3(16.91, 3687.32, 39.68)},
+														}
+														local options = {
+															-- icon = "https://cdn-icons-png.freepik.com/256/1453/1453025.png", 
+															color = {100, 255, 100, 100}, -- rgba value, used for internal icon and marker.
+															clearEnter = false, -- Upon entering the area, remove the waypoint.
+															blipId = 304, -- Display waypoint on map, or set to nil to disable.
+															blipColor = 5, -- Blip color on the map.
+														}
+														for i = 1, #waypoints do
+															exports.pickle_waypoints:AddWaypoint(waypoints[i].name, waypoints[i].coords, options)
+														end
+													end
+												}
+											})
+										end
+									},
+									[2] = {
+										label = "Localizar animais. 🐾",
+										shouldClose = true,
+										action = function()
+											local waypoints = {
+												{name = 'Área de Caça', coords = vec3(1125.88, 4622.2, 80.08)},						
+											}
+											local options = {
+												-- icon = "https://cdn-icons-png.freepik.com/256/3105/3105807.png",
+												color = {100, 255, 100, 100}, -- rgba value, used for internal icon and marker.
+												clearEnter = false, -- Upon entering the area, remove the waypoint.
+												blipId = 304, -- Display waypoint on map, or set to nil to disable.
+												blipColor = 5, -- Blip color on the map.
+											}
+											for i = 1, #waypoints do
+												exports.pickle_waypoints:AddWaypoint(waypoints[i].name, waypoints[i].coords, options)
+											end
+										end
+									},
+								})
+							end
+						},
+						[2] = {
+							label = "Ah sim... Tenho que fazer outra coisa.",
+							shouldClose = true,
+							action = function()
+							end
+						}
+					})
+			end
+		},
+		[2] = {
+			label = "Talvez outra hora...",
+			shouldClose = true,
+			action = function()
+			end
+		}
+	})
+end
+
+AddEventHandler("onResourceStart", function(resource)
+    if resource ~= GetCurrentResourceName() then return end
+    createNPCtalk()
+end)
+
+local function deleteNPCtalk()
+	if not npcTalk then return end
+	DeleteEntity(npcTalk)
+	npcTalk = nil
+end
+
 AddEventHandler("onResourceStop", function(resource)
     if resource ~= GetCurrentResourceName() then return end
     deleteAllEntities()
     stopMission()
     lib.hideTextUI()
+    deleteNPCtalk()
 end)

@@ -1,6 +1,7 @@
 lib.locale()
 
 Config = {}
+Config.npcTalk = true
 Config.Debug = false
 Config.Target = "ox_target"               -- only supporting ox_target and qb-target | nil to disable targeting
 Config.SpawnDelay = 1             -- seconds [how much time it should take between spawning animals]
